@@ -15,8 +15,9 @@ func (app *Config) routes() http.Handler {
 	mux.Use(cors.Handler(cors.Options{
 		AllowCredentials: true,
 		AllowedHeaders:   []string{"Accept", "Authorization", "Content-Type", "X-Amzn-Trace-Id", "X-CSRF-Token"},
-		AllowedMethods:   []string{"GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"},
+		AllowedMethods:   []string{"DELETE", "GET", "POST", "PUT", "OPTIONS"},
 		AllowedOrigins:   []string{"https://*", "http://*"},
+		ExposedHeaders:   []string{"Link"},
 		MaxAge:           300,
 	}))
 
