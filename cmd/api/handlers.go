@@ -54,7 +54,7 @@ func (app *Config) HandleSubmission(w http.ResponseWriter, r *http.Request) {
 
 func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 	// create JSON to send to Auth microservice
-	jsonData, _ := json.MarshalIndent(a, "", "  ")
+	jsonData, _ := json.Marshal(a)
 
 	// Call the Auth microservice
 	req, err := http.NewRequest("POST", "http://authentication-service/authenticate", bytes.NewBuffer(jsonData))
@@ -104,8 +104,8 @@ func (app *Config) authenticate(w http.ResponseWriter, a AuthPayload) {
 	app.writeJSON(w, http.StatusOK, payload)
 }
 
-func (app *Config) logItem(w http.ResponseWriter, entry LogPayload) {
-	jsonData, err := json.Marshal(entry)
+func (app *Config) logItem(w http.ResponseWriter, i LogPayload) {
+	jsonData, err := json.Marshal(i)
 	if err != nil {
 		log.Panic(err)
 	}
